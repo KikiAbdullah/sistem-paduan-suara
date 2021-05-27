@@ -70,6 +70,7 @@
                         </div>
                         <div class="form-group row">
                             @foreach ($audio as $data_audio)
+                            @if (in_array($data_audio->vocal, $category))
                             <div class="col-xl-6">
                                 <label>{{ $data_audio->title }}</label>
                                 <div class="custom-file">
@@ -79,7 +80,26 @@
                                     <label class="custom-file-label" for="audio">{{ $data_audio->audio }}</label>
                                 </div>
                             </div>
+                            @php
+                            $index = array_search($data_audio->vocal, $category);
+                            unset($category[$index]);
+                            @endphp
+                            @endif
                             @endforeach
+                            @if(!empty($category))
+                            @foreach ($category as $data_cat)
+                            <div class="col-xl-6">
+                                <label>Audio {{ $data_cat }}</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" id="audio"
+                                        name="audio[{{ $data_cat }}]" data-toggle="custom-file-input">
+                                    <label class="custom-file-label" for="audio">Pilih Audio ...
+                                        ({{ $data_cat }})</label>
+                                </div>
+                            </div>
+                            @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

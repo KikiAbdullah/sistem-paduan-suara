@@ -74,6 +74,8 @@ class MateriController extends Controller
 
         $audio = Audio::where('slug', $materi->slug)->get();
 
-        return view('materi.edit', compact('materi', 'audio'));
+        $category = ['a', 'i', 'u', 'e', 'o'];
+
+        return view('materi.edit', compact('materi', 'audio', 'category'));
     }
 }
