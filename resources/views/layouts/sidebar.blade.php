@@ -6,7 +6,6 @@
                 <a class="nav-main-link" href="{{ url('/') }}">
                     <i class="nav-main-link-icon fa fa-location-arrow"></i>
                     <span class="nav-main-link-name">Dashboard</span>
-                    <span class="nav-main-link-badge badge badge-pill badge-success">3</span>
                 </a>
             </li>
             <li class="nav-main-item">
