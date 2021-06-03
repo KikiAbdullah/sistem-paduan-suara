@@ -121,7 +121,7 @@
             <div class="block-content bg-body-light">
                 <div class="row justify-content-center push">
                     <div class="col-md-10">
-                        <input type="submit" class="btn btn-alt-primary" value="Create Post">
+                        <input type="submit" class="btn btn-alt-primary" value="Tambah Materi">
                     </div>
                 </div>
             </div>

@@ -29,7 +29,8 @@
 @section('content')
 <div class="content content-full content-boxed">
     <!-- New Post -->
-    <form action="be_pages_blog_post_add.html" method="POST" enctype="multipart/form-data" onsubmit="return false;">
+    <form action="{{ route('update.materi', encrypt($materi->id)) }}" method="POST" enctype="multipart/form-data">
+        @csrf
         <div class="block">
             <div class="block-header block-header-default">
                 <a class="btn btn-light" href="{{ route('backend.materi') }}">
@@ -78,6 +79,9 @@
                                     <input type="file" class="custom-file-input" id="audio"
                                         name="audio[{{ $data_audio->vocal }}]" data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">{{ $data_audio->audio }}</label>
+                                    {{-- hidden id_audio --}}
+                                    <input type="hidden" name="id_audio[{{ $data_audio->vocal }}]"
+                                        value="{{ $data_audio->id }}">
                                 </div>
                             </div>
                             @php

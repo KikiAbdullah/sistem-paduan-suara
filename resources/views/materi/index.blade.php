@@ -128,7 +128,8 @@
                         <td>
                             <a href="{{ route('edit.materi', encrypt($data_materi['id'])) }}"
                                 class="btn btn-info btn-sm btn-block">Edit</a>
-                            <a href="" class="btn btn-danger btn-sm btn-block">Delete</a>
+                            <a href="{{ route('destroy.materi', encrypt($data_materi['id'])) }}"
+                                class="btn btn-danger btn-sm btn-block">Delete</a>
                         </td>
                     </tr>
                     @endforeach
