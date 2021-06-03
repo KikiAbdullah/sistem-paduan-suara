@@ -21,7 +21,7 @@
     <div class="row text-center">
         <div class="col-6 col-xl-3">
             <!-- All Posts -->
-            <a class="block block-rounded" href="be_pages_blog_post_manage.html">
+            <a class="block block-rounded" href="#">
                 <div class="block-content block-content-full">
                     <div class="py-md-3">
                         <div class="py-3 d-none d-md-block">
@@ -40,7 +40,7 @@
         </div>
         <div class="col-6 col-xl-3">
             <!-- Active Posts -->
-            <a class="block block-rounded" href="be_pages_blog_post_manage.html">
+            <a class="block block-rounded" href="#">
                 <div class="block-content block-content-full">
                     <div class="py-md-3">
                         <div class="py-3 d-none d-md-block">
@@ -59,7 +59,7 @@
         </div>
         <div class="col-6 col-xl-3">
             <!-- Draft Posts -->
-            <a class="block block-rounded" href="be_pages_blog_post_manage.html">
+            <a class="block block-rounded" href="#">
                 <div class="block-content block-content-full">
                     <div class="py-md-3">
                         <div class="py-3 d-none d-md-block">
