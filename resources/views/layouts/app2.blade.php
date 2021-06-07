@@ -67,7 +67,7 @@
                 <!-- END Sidebar Scrolling -->
             </nav>
             <!-- END Sidebar -->
-
+            @include('sweetalert::alert')
             <!-- Header -->
             @include('layouts.header')
             <!-- END Header -->

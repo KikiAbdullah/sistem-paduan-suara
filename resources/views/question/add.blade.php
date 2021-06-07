@@ -52,6 +52,53 @@
                             <label>Pertanyaan</label>
                             <textarea id="js-ckeditor" name="question"></textarea>
                         </div>
+                        <div class="form-group row">
+                            <div class="col-xl-6">
+                                <label>Audio A</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[a]"
+                                        data-toggle="custom-file-input">
+                                    <label class="custom-file-label" for="audio">Pilih Audio ... (A)</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <label>Audio I</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[i]"
+                                        data-toggle="custom-file-input">
+                                    <label class="custom-file-label" for="audio">Pilih Audio ... (I)</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <label>Audio U</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[u]"
+                                        data-toggle="custom-file-input">
+                                    <label class="custom-file-label" for="audio">Pilih Audio ... (U)</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <label>Audio E</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[e]"
+                                        data-toggle="custom-file-input">
+                                    <label class="custom-file-label" for="audio">Pilih Audio ... (E)</label>
+                                </div>
+                            </div>
+                            <div class="col-xl-6">
+                                <label>Audio O</label>
+                                <div class="custom-file">
+                                    <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[o]"
+                                        data-toggle="custom-file-input">
+                                    <label class="custom-file-label" for="audio">Pilih Audio ... (O)</label>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

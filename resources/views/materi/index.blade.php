@@ -129,7 +129,7 @@
                             <a href="{{ route('edit.materi', encrypt($data_materi['id'])) }}"
                                 class="btn btn-info btn-sm btn-block">Edit</a>
                             <a href="{{ route('destroy.materi', encrypt($data_materi['id'])) }}"
-                                class="btn btn-danger btn-sm btn-block">Delete</a>
+                                class="btn btn-danger btn-sm btn-block delete-confirm">Delete</a>
                         </td>
                     </tr>
                     @endforeach
@@ -175,4 +175,23 @@
     </div>
     <!-- END Posts -->
 </div>
+@endsection
+
+@section('js')
+<script>
+    $('.delete-confirm').on('click', function(event) {
+        event.preventDefault();
+        const url = $(this).attr('href');
+        swal({
+            title: 'Apakah Anda Yakin?',
+            text: 'Data yang dihapus akan hilang secara permanen',
+            icon: 'warning',
+            buttons: ["Batal", "Hapus!"],
+        }).then(function(value) {
+            if (value) {
+                window.location.href = url;
+            }
+        });
+    });
+</script>
 @endsection

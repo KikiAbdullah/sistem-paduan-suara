@@ -13,13 +13,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+
+
 
 Auth::routes();
+Route::get('/', 'FrontendController@home');
+Route::get('/home', 'FrontendController@home')->name('home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/materi', 'FrontendController@materi')->name('materi');
+Route::get('/materi/detail/{slug}', 'FrontendController@materi_detail')->name('materi.detail');
+
+Route::get('/uji', 'FrontendController@uji')->name('uji');
+
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::get('/backend/materi', 'MateriController@index')->name('backend.materi');

@@ -7,6 +7,7 @@ use App\Materi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Alert;
 
 class MateriController extends Controller
 {
@@ -39,7 +40,7 @@ class MateriController extends Controller
             $materi->publish = 0;
         }
 
-        $path = public_path('/materi/' . $slug);
+        $path = public_path('uploads/materi/' . $slug);
 
         if ($request->file('image') != null) {
             $image = $request->file('image');
@@ -93,7 +94,7 @@ class MateriController extends Controller
             $materi->publish = 0;
         }
 
-        $path = public_path('/materi/' . $slug);
+        $path = public_path('uploads/materi/' . $slug);
 
         if ($request->file('image') != null) {
             $image = $request->file('image');
@@ -106,8 +107,6 @@ class MateriController extends Controller
 
         //upload audio
         if (!empty($request->audio)) {
-
-
             foreach ($request->audio as $key => $audio) {
                 $audio_db = Audio::find($request->id_audio[$key]);
                 $audio_db->title = 'Audio ' . $key;
@@ -124,6 +123,7 @@ class MateriController extends Controller
             }
         }
 
+        Alert::success('success', 'Data berhasil diubah');
         return redirect('backend/materi');
     }
 
