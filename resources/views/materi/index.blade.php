@@ -176,22 +176,3 @@
     <!-- END Posts -->
 </div>
 @endsection
-
-@section('js')
-<script>
-    $('.delete-confirm').on('click', function(event) {
-        event.preventDefault();
-        const url = $(this).attr('href');
-        swal({
-            title: 'Apakah Anda Yakin?',
-            text: 'Data yang dihapus akan hilang secara permanen',
-            icon: 'warning',
-            buttons: ["Batal", "Hapus!"],
-        }).then(function(value) {
-            if (value) {
-                window.location.href = url;
-            }
-        });
-    });
-</script>
-@endsection

@@ -26,8 +26,6 @@ Route::get('/materi/detail/{slug}', 'FrontendController@materi_detail')->name('m
 
 Route::get('/uji', 'FrontendController@uji')->name('uji');
 
-
-
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {
