@@ -26,6 +26,13 @@ Route::get('/materi/detail/{slug}', 'FrontendController@materi_detail')->name('m
 
 Route::get('/uji', 'FrontendController@uji')->name('uji');
 
+Route::get('/klasifikasi', 'FrontendController@daftar_anggota')->name('klasifikasi');
+Route::post('/klasifikasi/proses', 'KlasifikasiController@store')->name('klasifikasi.proses');
+
+Route::get('/hasil', 'FrontendController@hasil_daftar')->name('hasil');
+
+
+
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware('auth')->group(function () {

@@ -6,6 +6,7 @@ use App\Audio;
 use App\Materi;
 use App\Question;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
@@ -33,5 +34,21 @@ class FrontendController extends Controller
         $class_audio = new Audio;
 
         return view('frontend.uji.index', compact('questions', 'class_audio'));
+    }
+
+    public function daftar_anggota()
+    {
+        return view('frontend.daftar.index');
+    }
+
+    public function hasil_daftar()
+    {
+        $hasil = Session::get('msg');
+
+        if (empty($hasil)) {
+            return redirect('klasifikasi');
+        } else {
+            return view('frontend.daftar.hasil', compact('hasil'));
+        }
     }
 }
