@@ -25,6 +25,8 @@ Route::get('/materi', 'FrontendController@materi')->name('materi');
 Route::get('/materi/detail/{slug}', 'FrontendController@materi_detail')->name('materi.detail');
 
 Route::get('/uji', 'FrontendController@uji')->name('uji');
+Route::get('/uji/hasil', 'FrontendController@hasil_uji')->name('uji.hasil');
+
 
 Route::get('/klasifikasi', 'FrontendController@daftar_anggota')->name('klasifikasi');
 Route::post('/klasifikasi/proses', 'KlasifikasiController@store')->name('klasifikasi.proses');

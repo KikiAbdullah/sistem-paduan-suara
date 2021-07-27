@@ -47,6 +47,17 @@ class FrontendController extends Controller
         return view('frontend.uji.index', compact('questions', 'class_audio', 'suara'));
     }
 
+    public function hasil_uji()
+    {
+        $hasil = Session::get('hasil');
+
+        if (!empty($hasil)) {
+            return redirect('uji');
+        } else {
+            return view('frontend.uji.hasil', compact('hasil'));
+        }
+    }
+
     public function daftar_anggota()
     {
         return view('frontend.daftar.index');

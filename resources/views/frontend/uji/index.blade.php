@@ -27,7 +27,8 @@
                                         <h4 class="faq-title">
                                             <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
                                                 href="#faq{{ $key+1 }}"><i class="fa fa-question"></i>
-                                                Pertanyaan {{ $key+1 }} {{ $data_question['jenis_suara'] }}
+                                                {{ $data_question['kriteria'] }}
+                                                {{ $data_question['jenis_suara'] }}
                                             </a>
                                         </h4>
                                     </div>
@@ -36,26 +37,27 @@
                                         role="tabpane{{ $key+1 }}" aria-labelledby="FaqTitle1">
                                         <div class="faq-body">
                                             {!! $data_question['question'] !!}
-
                                             <br>
                                             <input type="hidden" name="kriteria[{{$key}}]"
                                                 value="{{ $data_question['kriteria'] }}">
                                             <input type="hidden" name="jenis_suara[{{$key}}]"
                                                 value="{{ $data_question['jenis_suara'] }}">
 
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="bobot[{{$key}}]"
-                                                    id="flexRadioDefault1" value="20">
-                                                <label class="form-check-label" for="flexRadioDefault1">
-                                                    Ya
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="bobot[{{ $key }}]"
-                                                    id="flexRadioDefault2" value="10">
-                                                <label class="form-check-label" for="flexRadioDefault2">
-                                                    Tidak
-                                                </label>
+                                            <div class="ml-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio" name="bobot[{{$key}}]"
+                                                        id="flexRadioDefault1" value="20">
+                                                    <label class="form-check-label" for="flexRadioDefault1">
+                                                        Ya
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                        name="bobot[{{ $key }}]" id="flexRadioDefault2" value="10">
+                                                    <label class="form-check-label" for="flexRadioDefault2">
+                                                        Tidak
+                                                    </label>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>

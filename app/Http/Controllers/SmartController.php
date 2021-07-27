@@ -16,12 +16,6 @@ class SmartController extends Controller
         $bobot = 0;
         $jml_quest = Question::count();
         for ($i = 0; $i < $jml_quest; $i++) {
-            // $hasil[] = [
-            //     'jenis_suara' => $request->jenis_suara[$i],
-            //     'kriteria' => $request->kriteria[$i],
-            //     'bobot' => $request->bobot[$i],
-            // ];
-
             $pembobotan = new Pembobotan();
             $pembobotan->jenis_suara = $request->jenis_suara[$i];
             $pembobotan->kriteria = $request->kriteria[$i];
@@ -32,7 +26,7 @@ class SmartController extends Controller
         $this->normalisasi();
         $hasil = $this->ranking();
 
-        dd($hasil);
+        return view('frontend.uji.hasil', compact('hasil'));
     }
 
     public function normalisasi()
@@ -48,17 +42,29 @@ class SmartController extends Controller
             $normalisasi->kriteria = $value['kriteria'];
             $normalisasi->total = $value['total'] / $total[$value['kriteria']];
             $normalisasi->save();
-            // $hasil[] =  $value['total'] / $total[$value['kriteria']];
         }
-
-        // dd($hasil);
     }
 
     public function ranking()
     {
-        return Pembobotan::groupBy('jenis_suara')
+        $data = Pembobotan::groupBy('jenis_suara')
             ->selectRaw('sum(total) as sum, jenis_suara')
             ->orderBy('sum', 'desc')
             ->pluck('sum', 'jenis_suara');
+
+        return $this->getRanking($data);
+    }
+
+    public function getRanking($data)
+    {
+        $collection = collect($data);
+        $data       = $collection;
+        $key      = $data->keys()->first();
+        $total      = $data->first();
+        $value = [
+            'jenis_suara' => $key,
+            'total' => $total
+        ];
+        return $value;
     }
 }
