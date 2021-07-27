@@ -2,8 +2,7 @@
 
 @section('breadcrumbs')
 <!-- Breadcrumb -->
-<div class="breadcrumbs overlay"
-    style="background-image:url('https://images.unsplash.com/photo-1548795835-264877304664?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
+<div class="breadcrumbs overlay" style="background-image:url('https://images.unsplash.com/photo-1548795835-264877304664?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80')">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-12">
@@ -27,20 +26,17 @@
     <div class="container">
         <div class="row">
             @foreach ($materi as $data_materi)
-            <div class="col-lg-4 col-md-6 col-12">
+            <div class="col-md-4">
                 <!-- Single Course -->
                 <div class="single-course">
                     <!-- Course Head -->
                     <div class="course-head overlay">
-                        <img src="{{ url('uploads/materi/'.$data_materi['slug'].'/image/'.$data_materi['image']) }}"
-                            alt="Image">
-                        <a href="{{ route('materi.detail', $data_materi['slug']) }}"
-                            class="btn white primary">Detail</a>
+                        <img src="{{ url('uploads/materi/'.$data_materi['slug'].'/image/'.$data_materi['image']) }}" alt="Image">
+                        <a href="{{ route('materi.detail', $data_materi['slug']) }}" class="btn white primary">Detail</a>
                     </div>
                     <!-- Course Body -->
                     <div class="course-body">
-                        <h4 class="c-title"><a
-                                href="{{ route('materi.detail', $data_materi['slug']) }}">{{ $data_materi['title'] }}</a>
+                        <h4 class="c-title"><a href="{{ route('materi.detail', $data_materi['slug']) }}">{{ $data_materi['title'] }}</a>
                         </h4>
                         <p align="justify">
                             @php

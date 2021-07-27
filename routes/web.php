@@ -43,6 +43,13 @@ Route::middleware('auth')->group(function () {
     Route::post('/backend/materi/update/{id}', 'MateriController@update')->name('update.materi');
     Route::get('/backend/materi/destroy/{id}', 'MateriController@destroy')->name('destroy.materi');
 
+    Route::get('/backend/jenis_suara', 'JenisSuaraController@index')->name('backend.jenis_suara');
+    Route::get('/backend/jenis_suara/add', 'JenisSuaraController@add')->name('add.jenis_suara');
+    Route::post('/backend/jenis_suara/store', 'JenisSuaraController@store')->name('store.jenis_suara');
+    Route::get('/backend/jenis_suara/edit/{id}', 'JenisSuaraController@edit')->name('edit.jenis_suara');
+    Route::post('/backend/jenis_suara/update/{id}', 'JenisSuaraController@update')->name('update.jenis_suara');
+    Route::get('/backend/jenis_suara/destroy/{id}', 'JenisSuaraController@destroy')->name('destroy.jenis_suara');
+
     Route::get('/backend/question', 'QuestionController@index')->name('backend.question');
     Route::get('/backend/question/add', 'QuestionController@add')->name('add.question');
     Route::post('/backend/question/store', 'QuestionController@store')->name('store.question');

@@ -9,7 +9,7 @@
 <div class="bg-body-light">
     <div class="content content-full">
         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Data Pertanyaan</h1>
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Data Jenis Suara</h1>
         </div>
     </div>
 </div>
@@ -20,7 +20,7 @@
     <!-- Dynamic Table Full -->
     <div class="block block-rounded">
         <div class="block-header block-header-default">
-            <a href="{{ route('add.question') }}" class="btn btn-primary float-right">+ Tambah Pertanyaan</a>
+            <a href="{{ route('add.jenis_suara') }}" class="btn btn-primary float-right">+ Tambah Jenis Suara</a>
         </div>
         <div class="block-content block-content-full">
             <!-- DataTables init on table by adding .js-dataTable-full class, functionality is initialized in js/pages/be_tables_datatables.min.js which was auto compiled from _js/pages/be_tables_datatables.js -->
@@ -28,20 +28,20 @@
                 <thead>
                     <tr>
                         <th class="text-center" style="width: 80px;">No</th>
-                        <th>Kriteria</th>
-                        <th>Pertanyaan</th>
+                        <th>Jenis Suara</th>
+                        <th>Keterangan</th>
                         <th style="width: 15%;">Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($questions as $key => $question)
+                    @foreach ($jenis_suara as $key => $data_jenis_suara)
                     <tr>
                         <td>{{ $key+1 }}</td>
-                        <td>{{ $question['kriteria'] }}</td>
-                        <td>{!! $question['question'] !!}</td>
+                        <td>{{ $data_jenis_suara['nama'] }}</td>
+                        <td>{!! $data_jenis_suara['keterangan'] !!}</td>
                         <td>
-                            <a href="{{ route('edit.question', encrypt($question['id'])) }}" class="btn btn-info btn-sm btn-block">Edit</a>
-                            <a href="{{ route('destroy.question', encrypt($question['id'])) }}" class="btn btn-danger btn-sm btn-block">Delete</a>
+                            <a href="{{ route('edit.jenis_suara', encrypt($data_jenis_suara['id'])) }}" class="btn btn-info btn-sm btn-block">Edit</a>
+                            <a href="{{ route('destroy.jenis_suara', encrypt($data_jenis_suara['id'])) }}" class="btn btn-danger btn-sm btn-block">Delete</a>
                         </td>
                     </tr>
                     @endforeach

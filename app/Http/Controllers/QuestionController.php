@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Audio;
+use App\KriteriaSmart;
 use App\Question;
 use Illuminate\Http\Request;
 
@@ -10,14 +11,15 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        $questions = Question::all();
+        $questions = Question::join('kriteria_smart', 'questions.kriteria_id', 'kriteria_smart.id')->get();
 
         return view('question.index', compact('questions'));
     }
 
     public function add()
     {
-        return view('question.add');
+        $kriteria = KriteriaSmart::all();
+        return view('question.add', compact('kriteria'));
     }
 
     public function store(Request $request)
@@ -29,6 +31,7 @@ class QuestionController extends Controller
             $show = 0;
         }
 
+        $question->kriteria_id = $request->kriteria_id;
         $question->show = $show;
         $question->question = $request->question;
         $question->save();
@@ -61,13 +64,15 @@ class QuestionController extends Controller
 
     public function edit($id)
     {
+        $kriteria = KriteriaSmart::all();
+
         $question = Question::find(decrypt($id));
 
         $audio = Audio::where('slug', 'question-' . decrypt($id))->get();
 
         $category = ['a', 'i', 'u', 'e', 'o'];
 
-        return view('question.edit', compact('question', 'audio', 'category'));
+        return view('question.edit', compact('question', 'audio', 'category', 'kriteria'));
     }
 
     public function update($id, Request $request)
@@ -80,6 +85,7 @@ class QuestionController extends Controller
                 $show = 0;
             }
 
+            $question->kriteria_id = $request->kriteria_id;
             $question->show = $show;
             $question->question = $request->question;
             $question->save();
