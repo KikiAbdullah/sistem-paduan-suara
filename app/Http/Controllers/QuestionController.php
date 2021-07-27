@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Audio;
+use App\Jenis_suara;
 use App\KriteriaSmart;
 use App\Question;
 use Illuminate\Http\Request;
@@ -11,7 +12,9 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        $questions = Question::join('kriteria_smart', 'questions.kriteria_id', 'kriteria_smart.id')->get();
+        $questions = Question::select('questions.id as id_quest', 'kriteria', 'question', 'jenis_suara.nama as jenis_suara')
+            ->join('kriteria_smart', 'questions.kriteria_id', 'kriteria_smart.id')
+            ->join('jenis_suara', 'questions.jenis_suara_id', 'jenis_suara.id')->get();
 
         return view('question.index', compact('questions'));
     }
@@ -19,7 +22,8 @@ class QuestionController extends Controller
     public function add()
     {
         $kriteria = KriteriaSmart::all();
-        return view('question.add', compact('kriteria'));
+        $jenis_suara = Jenis_suara::all();
+        return view('question.add', compact('kriteria', 'jenis_suara'));
     }
 
     public function store(Request $request)
@@ -32,6 +36,7 @@ class QuestionController extends Controller
         }
 
         $question->kriteria_id = $request->kriteria_id;
+        $question->jenis_suara_id = $request->jenis_suara_id;
         $question->show = $show;
         $question->question = $request->question;
         $question->save();
@@ -44,20 +49,23 @@ class QuestionController extends Controller
         $path = public_path('uploads/question/' . $slug);
 
         //upload audio
-        foreach ($request->audio as $key => $audio) {
-            $audio_db = new Audio();
-            $audio_db->title = 'Audio ' . $key;
-            $audio_db->slug = $slug;
-            $audio_db->vocal = $key;
-            if ($audio != null) {
-                $audio_db->audio = $audio->getClientOriginalName();
-                // upload file
-                $audio->move($path . '/audio/', $audio->getClientOriginalName());
-            } else {
-                $audio_db->audio = null;
+        if (!empty($request->audio)) {
+            foreach ($request->audio as $key => $audio) {
+                $audio_db = new Audio();
+                $audio_db->title = 'Audio ' . $key;
+                $audio_db->slug = $slug;
+                $audio_db->vocal = $key;
+                if ($audio != null) {
+                    $audio_db->audio = $audio->getClientOriginalName();
+                    // upload file
+                    $audio->move($path . '/audio/', $audio->getClientOriginalName());
+                } else {
+                    $audio_db->audio = null;
+                }
+                $audio_db->save();
             }
-            $audio_db->save();
         }
+
 
         return redirect('backend/question');
     }
@@ -65,6 +73,8 @@ class QuestionController extends Controller
     public function edit($id)
     {
         $kriteria = KriteriaSmart::all();
+        $jenis_suara = Jenis_suara::all();
+
 
         $question = Question::find(decrypt($id));
 
@@ -72,7 +82,7 @@ class QuestionController extends Controller
 
         $category = ['a', 'i', 'u', 'e', 'o'];
 
-        return view('question.edit', compact('question', 'audio', 'category', 'kriteria'));
+        return view('question.edit', compact('question', 'audio', 'category', 'kriteria', 'jenis_suara'));
     }
 
     public function update($id, Request $request)
@@ -86,6 +96,7 @@ class QuestionController extends Controller
             }
 
             $question->kriteria_id = $request->kriteria_id;
+            $question->jenis_suara_id = $request->jenis_suara_id;
             $question->show = $show;
             $question->question = $request->question;
             $question->save();

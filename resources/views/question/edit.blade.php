@@ -38,7 +38,8 @@
                 </a>
                 <div class="block-options">
                     <div class="custom-control custom-switch custom-control-success">
-                        <input type="checkbox" class="custom-control-input" id="show" name="show" {{ $question['show'] == 1 ? 'checked' : '' }}>
+                        <input type="checkbox" class="custom-control-input" id="show" name="show"
+                            {{ $question['show'] == 1 ? 'checked' : '' }}>
                         <label class="custom-control-label" for="show">Tampilkan</label>
                     </div>
                 </div>
@@ -51,7 +52,22 @@
                             <select name="kriteria_id" id="" class="form-control">
                                 <option disabled selected>Pilih Kriteria</option>
                                 @foreach($kriteria as $data_kriteria)
-                                <option value="{{ $data_kriteria['id'] }}" {{ $question['kriteria_id'] == $data_kriteria['id'] ? 'selected' : '' }}>{{ $data_kriteria['kriteria'] }}</option>
+                                <option value="{{ $data_kriteria['id'] }}"
+                                    {{ $question['kriteria_id'] == $data_kriteria['id'] ? 'selected' : '' }}>
+                                    {{ $data_kriteria['kriteria'] }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Jenis Suara</label>
+                            <select name="jenis_suara_id" id="" class="form-control">
+                                <option disabled selected>Pilih Jenis Suara</option>
+                                @foreach($jenis_suara as $data_jenis_suara)
+                                <option value="{{ $data_jenis_suara['id'] }}"
+                                    {{ $question['jenis_suara_id'] == $data_jenis_suara['id'] ? 'selected' : '' }}>
+                                    {{ $data_jenis_suara['nama'] }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>
@@ -68,10 +84,12 @@
                                 <label>{{ $data_audio->title }}</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[{{ $data_audio->vocal }}]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio"
+                                        name="audio[{{ $data_audio->vocal }}]" data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">{{ $data_audio->audio }}</label>
                                     {{-- hidden id_audio --}}
-                                    <input type="hidden" name="id_audio[{{ $data_audio->vocal }}]" value="{{ $data_audio->id }}">
+                                    <input type="hidden" name="id_audio[{{ $data_audio->vocal }}]"
+                                        value="{{ $data_audio->id }}">
                                 </div>
                             </div>
                             @php
@@ -86,7 +104,8 @@
                                 <label>Audio {{ $data_cat }}</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[{{ $data_cat }}]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio"
+                                        name="audio[{{ $data_cat }}]" data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">Pilih Audio ...
                                         ({{ $data_cat }})</label>
                                 </div>
@@ -127,16 +146,18 @@
 
 <!-- Page JS Helpers (CKEditor plugin) -->
 <script>
-    jQuery(function() {
-        CKEDITOR.config.height = '450px';
-        Dashmix.helpers(['ckeditor']);
-    });
+jQuery(function() {
+    CKEDITOR.config.height = '450px';
+    Dashmix.helpers(['ckeditor']);
+});
 </script>
 
 <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Ion Range Slider + Masked Inputs + Password Strength Meter plugins) -->
 <script>
-    jQuery(function() {
-        Dashmix.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider', 'masked-inputs', 'pw-strength']);
-    });
+jQuery(function() {
+    Dashmix.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider',
+        'masked-inputs', 'pw-strength'
+    ]);
+});
 </script>
 @endsection

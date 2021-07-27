@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Audio;
+use App\Jenis_suara;
 use App\Materi;
 use App\Question;
 use Illuminate\Http\Request;
@@ -30,10 +31,20 @@ class FrontendController extends Controller
 
     public function uji()
     {
-        $questions = Question::where('show', 1)->get();
+        $questions = Question::select('questions.id as id_quest', 'kriteria', 'question', 'jenis_suara.nama as jenis_suara', 'kriteria_id')
+            ->join('kriteria_smart', 'questions.kriteria_id', 'kriteria_smart.id')
+            ->join('jenis_suara', 'questions.jenis_suara_id', 'jenis_suara.id')
+            ->where('show', 1)
+            ->orderBy('jenis_suara', 'asc')->get();
+
+        $jenis_suara = Jenis_suara::all();
+
+        foreach ($jenis_suara as $key => $value) {
+            $suara[] = $value['id'];
+        }
         $class_audio = new Audio;
 
-        return view('frontend.uji.index', compact('questions', 'class_audio'));
+        return view('frontend.uji.index', compact('questions', 'class_audio', 'suara'));
     }
 
     public function daftar_anggota()

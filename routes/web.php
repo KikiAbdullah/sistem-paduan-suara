@@ -31,6 +31,13 @@ Route::post('/klasifikasi/proses', 'KlasifikasiController@store')->name('klasifi
 
 Route::get('/hasil', 'FrontendController@hasil_daftar')->name('hasil');
 
+Route::post('/smart/proses', 'SmartController@proses')->name('proses.smart');
+Route::get('/smart/normalisasi', 'SmartController@normalisasi')->name('normalisasi.smart');
+Route::get('/smart/ranking', 'SmartController@ranking')->name('ranking.smart');
+
+
+
+
 
 
 // Route::get('/home', 'HomeController@index')->name('home');

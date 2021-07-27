@@ -29,6 +29,7 @@
                     <tr>
                         <th class="text-center" style="width: 80px;">No</th>
                         <th>Kriteria</th>
+                        <th>Jenis Suara</th>
                         <th>Pertanyaan</th>
                         <th style="width: 15%;">Aksi</th>
                     </tr>
@@ -38,10 +39,13 @@
                     <tr>
                         <td>{{ $key+1 }}</td>
                         <td>{{ $question['kriteria'] }}</td>
+                        <td>{{ $question['jenis_suara'] }}</td>
                         <td>{!! $question['question'] !!}</td>
                         <td>
-                            <a href="{{ route('edit.question', encrypt($question['id'])) }}" class="btn btn-info btn-sm btn-block">Edit</a>
-                            <a href="{{ route('destroy.question', encrypt($question['id'])) }}" class="btn btn-danger btn-sm btn-block">Delete</a>
+                            <a href="{{ route('edit.question', encrypt($question['id_quest'])) }}"
+                                class="btn btn-info btn-sm btn-block">Edit</a>
+                            <a href="{{ route('destroy.question', encrypt($question['id_quest'])) }}"
+                                class="btn btn-danger btn-sm btn-block">Delete</a>
                         </td>
                     </tr>
                     @endforeach

@@ -56,6 +56,17 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            <label>Jenis Suara</label>
+                            <select name="jenis_suara_id" id="" class="form-control">
+                                <option disabled selected>Pilih Jenis Suara</option>
+                                @foreach($jenis_suara as $data_jenis_suara)
+                                <option value="{{ $data_jenis_suara['id'] }}">
+                                    {{ $data_jenis_suara['nama'] }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <!-- CKEditor (js-ckeditor-inline + js-ckeditor ids are initialized in Helpers.ckeditor()) -->
                             <!-- For more info and examples you can check out http://ckeditor.com -->
                             <label>Pertanyaan</label>
@@ -66,7 +77,8 @@
                                 <label>Audio A</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[a]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[a]"
+                                        data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">Pilih Audio ... (A)</label>
                                 </div>
                             </div>
@@ -74,7 +86,8 @@
                                 <label>Audio I</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[i]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[i]"
+                                        data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">Pilih Audio ... (I)</label>
                                 </div>
                             </div>
@@ -82,7 +95,8 @@
                                 <label>Audio U</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[u]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[u]"
+                                        data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">Pilih Audio ... (U)</label>
                                 </div>
                             </div>
@@ -90,7 +104,8 @@
                                 <label>Audio E</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[e]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[e]"
+                                        data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">Pilih Audio ... (E)</label>
                                 </div>
                             </div>
@@ -98,7 +113,8 @@
                                 <label>Audio O</label>
                                 <div class="custom-file">
                                     <!-- Populating custom file input label with the selected filename (data-toggle="custom-file-input" is initialized in Helpers.coreBootstrapCustomFileInput()) -->
-                                    <input type="file" class="custom-file-input" id="audio" name="audio[o]" data-toggle="custom-file-input">
+                                    <input type="file" class="custom-file-input" id="audio" name="audio[o]"
+                                        data-toggle="custom-file-input">
                                     <label class="custom-file-label" for="audio">Pilih Audio ... (O)</label>
                                 </div>
                             </div>
@@ -136,16 +152,18 @@
 
 <!-- Page JS Helpers (CKEditor plugin) -->
 <script>
-    jQuery(function() {
-        CKEDITOR.config.height = '450px';
-        Dashmix.helpers(['ckeditor']);
-    });
+jQuery(function() {
+    CKEDITOR.config.height = '450px';
+    Dashmix.helpers(['ckeditor']);
+});
 </script>
 
 <!-- Page JS Helpers (Flatpickr + BS Datepicker + BS Colorpicker + BS Maxlength + Select2 + Ion Range Slider + Masked Inputs + Password Strength Meter plugins) -->
 <script>
-    jQuery(function() {
-        Dashmix.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider', 'masked-inputs', 'pw-strength']);
-    });
+jQuery(function() {
+    Dashmix.helpers(['flatpickr', 'datepicker', 'colorpicker', 'maxlength', 'select2', 'rangeslider',
+        'masked-inputs', 'pw-strength'
+    ]);
+});
 </script>
 @endsection
