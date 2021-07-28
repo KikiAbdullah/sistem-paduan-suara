@@ -16,6 +16,11 @@ class FrontendController extends Controller
         return view('frontend.home');
     }
 
+    public function test()
+    {
+        return view('frontend.test');
+    }
+
     public function materi()
     {
         $materi = Materi::where('publish', 1)->get();

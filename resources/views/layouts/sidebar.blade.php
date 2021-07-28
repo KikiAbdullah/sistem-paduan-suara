@@ -19,7 +19,13 @@
                 <p>Master Data</p>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('backend.question') }}">
+                <a class="nav-main-link" href="{{ route('backend.kriteria_smart') }}">
+                    <i class="nav-main-link-icon fa fa-location-arrow"></i>
+                    <span class="nav-main-link-name">Data Kriteria</span>
+                </a>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('backend.jenis_suara') }}">
                     <i class="nav-main-link-icon fa fa-location-arrow"></i>
                     <span class="nav-main-link-name">Data Jenis Suara</span>
                 </a>

@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 Route::get('/', 'FrontendController@home');
 Route::get('/home', 'FrontendController@home')->name('home');
+Route::get('/test', 'FrontendController@test')->name('test');
 
 Route::get('/materi', 'FrontendController@materi')->name('materi');
 Route::get('/materi/detail/{slug}', 'FrontendController@materi_detail')->name('materi.detail');
@@ -58,6 +59,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/backend/jenis_suara/edit/{id}', 'JenisSuaraController@edit')->name('edit.jenis_suara');
     Route::post('/backend/jenis_suara/update/{id}', 'JenisSuaraController@update')->name('update.jenis_suara');
     Route::get('/backend/jenis_suara/destroy/{id}', 'JenisSuaraController@destroy')->name('destroy.jenis_suara');
+
+    Route::get('/backend/kriteria_smart', 'KriteriaSmartController@index')->name('backend.kriteria_smart');
+    Route::get('/backend/kriteria_smart/add', 'KriteriaSmartController@add')->name('add.kriteria_smart');
+    Route::post('/backend/kriteria_smart/store', 'KriteriaSmartController@store')->name('store.kriteria_smart');
+    Route::get('/backend/kriteria_smart/edit/{id}', 'KriteriaSmartController@edit')->name('edit.kriteria_smart');
+    Route::post('/backend/kriteria_smart/update/{id}', 'KriteriaSmartController@update')->name('update.kriteria_smart');
+    Route::get('/backend/kriteria_smart/destroy/{id}', 'KriteriaSmartController@destroy')->name('destroy.kriteria_smart');
 
     Route::get('/backend/question', 'QuestionController@index')->name('backend.question');
     Route::get('/backend/question/add', 'QuestionController@add')->name('add.question');

@@ -7,7 +7,7 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3 col-12">
                 <div class="section-title bg">
-                    <h2><span>Tes </span>Paduan Suara</h2>
+                    <h2><span>Tes Penentuan </span>Jenis Suara</h2>
                     <p></p>
                     <div class="icon"><i class="fa fa-question"></i></div>
                 </div>
@@ -22,38 +22,40 @@
                                 @csrf
                                 @foreach ($questions as $key => $data_question)
                                 <!-- Single Faq -->
-                                <div class="panel panel-default {{ $key == 0 ? 'active' : ''}}">
-                                    <div class="faq-heading" id="FaqTitle1">
+                                <div class="panel panel-default">
+                                    <div class="faq-heading" id="FaqTitle{{ $key+1 }}">
                                         <h4 class="faq-title">
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion"
-                                                href="#faq{{ $key+1 }}"><i class="fa fa-question"></i>
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#faq{{ $key+1 }}"><i class="fa fa-question"></i>
                                                 {{ $data_question['kriteria'] }}
                                                 {{ $data_question['jenis_suara'] }}
                                             </a>
                                         </h4>
                                     </div>
-                                    <div id="faq{{ $key+1 }}"
-                                        class="panel-collapse collapse {{ $key == 0 ? 'show' : ''}}"
-                                        role="tabpane{{ $key+1 }}" aria-labelledby="FaqTitle1">
+                                    <div id="faq{{ $key+1 }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="FaqTitle{{ $key+1 }}">
                                         <div class="faq-body">
                                             {!! $data_question['question'] !!}
                                             <br>
-                                            <input type="hidden" name="kriteria[{{$key}}]"
-                                                value="{{ $data_question['kriteria'] }}">
-                                            <input type="hidden" name="jenis_suara[{{$key}}]"
-                                                value="{{ $data_question['jenis_suara'] }}">
+                                            <?php $audio = $class_audio::where('slug', 'question-' . $data_question['id_quest'])->get(); ?>
+                                            @if(!empty($audio))
+                                            @foreach ($audio as $data_audio)
+                                            <p>{{ $data_audio['title'] }}</p>
+                                            <audio src="{{ url('uploads/question/'.$data_audio['slug'].'/audio/'.$data_audio['audio']) }}" controls>
+                                            </audio>
+                                            @endforeach
+                                            @endif
+                                            <br>
+                                            <input type="hidden" name="kriteria[{{$key}}]" value="{{ $data_question['kriteria'] }}">
+                                            <input type="hidden" name="jenis_suara[{{$key}}]" value="{{ $data_question['jenis_suara'] }}">
 
                                             <div class="ml-3">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="bobot[{{$key}}]"
-                                                        id="flexRadioDefault1" value="20">
+                                                    <input class="form-check-input" type="radio" name="bobot[{{$key}}]" id="flexRadioDefault1" value="20">
                                                     <label class="form-check-label" for="flexRadioDefault1">
                                                         Ya
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio"
-                                                        name="bobot[{{ $key }}]" id="flexRadioDefault2" value="10">
+                                                    <input class="form-check-input" type="radio" name="bobot[{{ $key }}]" id="flexRadioDefault2" value="10">
                                                     <label class="form-check-label" for="flexRadioDefault2">
                                                         Tidak
                                                     </label>

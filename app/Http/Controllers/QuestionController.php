@@ -99,6 +99,31 @@ class QuestionController extends Controller
             $question->jenis_suara_id = $request->jenis_suara_id;
             $question->show = $show;
             $question->question = $request->question;
+
+            //cari id
+            $quest = Question::where('question', $request->question)->first();
+            $slug = 'question-' . $quest['id'];
+
+            $path = public_path('uploads/question/' . $slug);
+
+
+            if (!empty($request->audio)) {
+                foreach ($request->audio as $key => $audio) {
+                    $audio_db = new Audio();
+                    $audio_db->title = 'Audio ' . $key;
+                    $audio_db->slug = $slug;
+                    $audio_db->vocal = $key;
+                    if ($audio != null) {
+                        $audio_db->audio = $audio->getClientOriginalName();
+                        // upload file
+                        $audio->move($path . '/audio/', $audio->getClientOriginalName());
+                    } else {
+                        $audio_db->audio = null;
+                    }
+                    $audio_db->save();
+                }
+            }
+
             $question->save();
 
             return redirect('backend/question');
