@@ -19,9 +19,9 @@
                 <p>Master Data</p>
             </li>
             <li class="nav-main-item">
-                <a class="nav-main-link" href="{{ route('backend.kriteria_smart') }}">
+                <a class="nav-main-link" href="{{ route('backend.training') }}">
                     <i class="nav-main-link-icon fa fa-location-arrow"></i>
-                    <span class="nav-main-link-name">Data Kriteria</span>
+                    <span class="nav-main-link-name">Data Training</span>
                 </a>
             </li>
             <li class="nav-main-item">
@@ -30,10 +30,19 @@
                     <span class="nav-main-link-name">Data Jenis Suara</span>
                 </a>
             </li>
-            <li class="nav-main-item">
+            <!-- <li class="nav-main-item">
                 <a class="nav-main-link" href="{{ route('backend.question') }}">
                     <i class="nav-main-link-icon fa fa-location-arrow"></i>
                     <span class="nav-main-link-name">Data Pertanyaan</span>
+                </a>
+            </li> -->
+            <li class="nav-main-item">
+                <p>KNN</p>
+            </li>
+            <li class="nav-main-item">
+                <a class="nav-main-link" href="{{ route('backend.knn') }}">
+                    <i class="nav-main-link-icon fa fa-location-arrow"></i>
+                    <span class="nav-main-link-name">Perhitungan KNN</span>
                 </a>
             </li>
         </ul>

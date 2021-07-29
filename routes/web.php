@@ -60,12 +60,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/backend/jenis_suara/update/{id}', 'JenisSuaraController@update')->name('update.jenis_suara');
     Route::get('/backend/jenis_suara/destroy/{id}', 'JenisSuaraController@destroy')->name('destroy.jenis_suara');
 
-    Route::get('/backend/kriteria_smart', 'KriteriaSmartController@index')->name('backend.kriteria_smart');
-    Route::get('/backend/kriteria_smart/add', 'KriteriaSmartController@add')->name('add.kriteria_smart');
-    Route::post('/backend/kriteria_smart/store', 'KriteriaSmartController@store')->name('store.kriteria_smart');
-    Route::get('/backend/kriteria_smart/edit/{id}', 'KriteriaSmartController@edit')->name('edit.kriteria_smart');
-    Route::post('/backend/kriteria_smart/update/{id}', 'KriteriaSmartController@update')->name('update.kriteria_smart');
-    Route::get('/backend/kriteria_smart/destroy/{id}', 'KriteriaSmartController@destroy')->name('destroy.kriteria_smart');
+    Route::get('/backend/training', 'TrainingController@index')->name('backend.training');
+    Route::get('/backend/training/add', 'TrainingController@add')->name('add.training');
+    Route::post('/backend/training/store', 'TrainingController@store')->name('store.training');
+    Route::get('/backend/training/edit/{id}', 'TrainingController@edit')->name('edit.training');
+    Route::post('/backend/training/update/{id}', 'TrainingController@update')->name('update.training');
+    Route::get('/backend/training/destroy/{id}', 'TrainingController@destroy')->name('destroy.training');
 
     Route::get('/backend/question', 'QuestionController@index')->name('backend.question');
     Route::get('/backend/question/add', 'QuestionController@add')->name('add.question');
@@ -73,4 +73,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/backend/question/edit/{id}', 'QuestionController@edit')->name('edit.question');
     Route::post('/backend/question/update/{id}', 'QuestionController@update')->name('update.question');
     Route::get('/backend/question/destroy/{id}', 'QuestionController@destroy')->name('destroy.question');
+
+
+    //perhitungan knn
+    Route::get('/backend/knn', 'KnnController@index')->name('backend.knn');
+    Route::post('/knn/process', 'KnnController@process')->name('process.knn');
 });
