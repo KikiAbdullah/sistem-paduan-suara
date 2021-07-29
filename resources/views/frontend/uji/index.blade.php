@@ -1,80 +1,121 @@
 @extends('frontend.layouts.app')
 
 @section('content')
-<!-- Faqs -->
-<section class="faqs section">
+<!-- Contact Us -->
+<section id="contact" class="contact section">
     <div class="container">
         <div class="row">
             <div class="col-lg-6 offset-lg-3 col-12">
                 <div class="section-title bg">
-                    <h2><span>Tes Penentuan </span>Jenis Suara</h2>
-                    <p></p>
-                    <div class="icon"><i class="fa fa-question"></i></div>
+                    <h2>Tes Penentuan <span>Jenis Suara</span></h2>
+                    <p> Media aplikasi ini akan membantu perserta paduan suara pemula untuk mengetahui apakah suaranya masuk ke bass, tenor, alto atau sopran.</p>
+                    <div class="icon"><i class="fa fa-paper-plane"></i></div>
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-12 col-12">
-                <div class="faq-main">
-                    <div class="faq-content">
-                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-                            <form action="{{ route('proses.smart') }}" method="post">
-                                @csrf
-                                @foreach ($questions as $key => $data_question)
-                                <!-- Single Faq -->
-                                <div class="panel panel-default">
-                                    <div class="faq-heading" id="FaqTitle{{ $key+1 }}">
-                                        <h4 class="faq-title">
-                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#faq{{ $key+1 }}"><i class="fa fa-question"></i>
-                                                {{ $data_question['kriteria'] }}
-                                                {{ $data_question['jenis_suara'] }}
-                                            </a>
-                                        </h4>
-                                    </div>
-                                    <div id="faq{{ $key+1 }}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="FaqTitle{{ $key+1 }}">
-                                        <div class="faq-body">
-                                            {!! $data_question['question'] !!}
-                                            <br>
-                                            <?php $audio = $class_audio::where('slug', 'question-' . $data_question['id_quest'])->get(); ?>
-                                            @if(!empty($audio))
-                                            @foreach ($audio as $data_audio)
-                                            <p>{{ $data_audio['title'] }}</p>
-                                            <audio src="{{ url('uploads/question/'.$data_audio['slug'].'/audio/'.$data_audio['audio']) }}" controls>
-                                            </audio>
-                                            @endforeach
-                                            @endif
-                                            <br>
-                                            <input type="hidden" name="kriteria[{{$key}}]" value="{{ $data_question['kriteria'] }}">
-                                            <input type="hidden" name="jenis_suara[{{$key}}]" value="{{ $data_question['jenis_suara'] }}">
-
-                                            <div class="ml-3">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="bobot[{{$key}}]" id="flexRadioDefault1" value="20">
-                                                    <label class="form-check-label" for="flexRadioDefault1">
-                                                        Ya
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="bobot[{{ $key }}]" id="flexRadioDefault2" value="10">
-                                                    <label class="form-check-label" for="flexRadioDefault2">
-                                                        Tidak
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/ End Single Faq -->
-                                @endforeach
-                                <button class="btn btn-info btn-block" id="btn_bobot" type="submit">
-                                    <i class="fas fa-check"></i>&nbsp;Tampilkan Hasil
-                                </button>
-                            </form>
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-8 col-12">
+                <div class="form-head">
+                    <!-- Contact Form -->
+                    <form action="{{ route('uji.hasil') }}" method="post">
+                        @csrf
+                        <div class="form-group">
+                            <label>Pitch</label>
+                            <select name="pitch" id="" class="form-control">
+                                <option disabled selected>Pilih Pitch</option>
+                                <option value="1">Rendah</option>
+                                <option value="2">Tinngi</option>
+                            </select>
                         </div>
-                    </div>
+                        <div class="form-group">
+                            <label>Jenis Kelamin</label>
+                            <select name="jenis_kelamin" id="" class="form-control">
+                                <option disabled selected>Pilih Jenis Kelamin</option>
+                                <option value="1">Pria</option>
+                                <option value="2">Wanita</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Apakah Suara Anda cocok dengan jenis suara ini?</label>
+                                    <select name="c" id="" class="form-control">
+                                        <option disabled selected>Pilih</option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contoh Suara</label>
+                                    <audio src="{{ asset('uploads/suara/sopran.mp3') }}" controls>Suara 1</audio>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Apakah Suara Anda cocok dengan jenis suara ini?</label>
+                                    <select name="f" id="" class="form-control">
+                                        <option disabled selected>Pilih</option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contoh Suara</label>
+                                    <audio src="{{ asset('uploads/suara/alto.mp3') }}" controls>Suara 2</audio>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Apakah Suara Anda cocok dengan jenis suara ini?</label>
+                                    <select name="b" id="" class="form-control">
+                                        <option disabled selected>Pilih</option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contoh Suara</label>
+                                    <audio src="{{ asset('uploads/suara/tenor.mp3') }}" controls>Suara 3</audio>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Apakah Suara Anda cocok dengan jenis suara ini?</label>
+                                    <select name="e" id="" class="form-control">
+                                        <option disabled selected>Pilih</option>
+                                        <option value="1">Ya</option>
+                                        <option value="0">Tidak</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Contoh Suara</label>
+                                    <audio src="{{ asset('uploads/suara/bass.mp3') }}" controls>Suara 4</audio>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-alt-primary" value="Submit">
+                        </div>
+                    </form>
+                    <!--/ End Contact Form -->
                 </div>
             </div>
         </div>
     </div>
 </section>
+<!--/ End Contact Us -->
 @endsection

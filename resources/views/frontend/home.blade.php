@@ -17,12 +17,6 @@
                             <p class="slider-text">
                                 Media aplikasi ini akan membantu perserta paduan suara pemula untuk mengetahui apakah suaranya masuk ke bass, tenor, alto atau sopran.
                             </p>
-                            <!-- Button -->
-                            <div class="button">
-                                <a href="about.html" class="btn white">About Eduland</a>
-                                <a href="courses.html" class="btn white primary">Our Courses</a>
-                            </div>
-                            <!--/ End Button -->
                         </div>
                         <!--/ End Slider Content -->
                     </div>

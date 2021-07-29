@@ -6,11 +6,16 @@ use App\Audio;
 use App\Jenis_suara;
 use App\Materi;
 use App\Question;
+use App\Training;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class FrontendController extends Controller
 {
+    public function __construct()
+    {
+        $this->knn = new KnnController();
+    }
     public function home()
     {
         return view('frontend.home');
@@ -36,31 +41,26 @@ class FrontendController extends Controller
 
     public function uji()
     {
-        $questions = Question::select('questions.id as id_quest', 'kriteria', 'question', 'jenis_suara.nama as jenis_suara', 'kriteria_id')
-            ->join('kriteria_smart', 'questions.kriteria_id', 'kriteria_smart.id')
-            ->join('jenis_suara', 'questions.jenis_suara_id', 'jenis_suara.id')
-            ->where('show', 1)
-            ->orderBy('jenis_suara', 'asc')->get();
 
-        $jenis_suara = Jenis_suara::all();
-
-        foreach ($jenis_suara as $key => $value) {
-            $suara[] = $value['id'];
-        }
-        $class_audio = new Audio;
-
-        return view('frontend.uji.index', compact('questions', 'class_audio', 'suara'));
+        return view('frontend.uji.index');
     }
 
-    public function hasil_uji()
+    public function uji_proses(Request $request)
     {
-        $hasil = Session::get('hasil');
+        $input['pitch'] = trim($request->pitch);
+        $input['jenis_kelamin'] = trim($request->jenis_kelamin);
+        $input['c'] = trim($request->c);
+        $input['f'] = trim($request->f);
+        $input['b'] = trim($request->b);
+        $input['e'] = trim($request->e);
 
-        if (!empty($hasil)) {
-            return redirect('uji');
-        } else {
-            return view('frontend.uji.hasil', compact('hasil'));
-        }
+        $training = Training::all();
+        $hasil = $this->knn->knn($training, $input);
+        $nilai = $this->knn->memilah($hasil);
+
+        $hasil_uji = $this->knn->hasil_uji($nilai, $training, $input);
+
+        return view('frontend.uji.hasil', compact('hasil_uji'));
     }
 
     public function daftar_anggota()

@@ -72,14 +72,20 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header block-header-default">
-                    <h3 class="block-title">Data Baru</h3>
+                    <h3 class="block-title">Kesimpulan</h3>
                 </div>
                 <div class="block-content">
-
+                    <h3 class="block-title">1-NN</h3>
+                    {{ $nn1 }}
                 </div>
+                <div class="block-content">
+                    <h3 class="block-title">3-NN</h3>
+                    {{ $nn3 }}
+                </div>
+                <br><br>
             </div>
         </div>
 

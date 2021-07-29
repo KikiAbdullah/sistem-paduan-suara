@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title -->
-    <title>Eduland &minus; Education & Courses HTML5 Template</title>
+    <title>PADUAN SUARA</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('frontend/images/favicon.png') }}">
@@ -23,8 +23,6 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/bootstrap.min.css') }}">
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/font-awesome.min.css') }}">
-    <!-- Nice Select CSS -->
-    <link rel="stylesheet" href="{{ asset('frontend/css/niceselect.css') }}">
     <!-- Fancy Box CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/css/jquery.fancybox.min.css') }}">
     <!-- Fancy Box CSS -->
@@ -156,8 +154,6 @@
     <script src="{{ asset('frontend/js/jquery.magnific-popup.min.js') }}"></script>
     <!-- Circle Progress JS -->
     <script src="{{ asset('frontend/js/circle-progress.min.js') }}"></script>
-    <!-- Nice Select JS -->
-    <script src="{{ asset('frontend/js/niceselect.js') }}"></script>
     <!-- Jquery Steller JS-->
     <script src="{{ asset('frontend/js/jquery.stellar.min.js') }}"></script>
     <!-- Jquery Steller JS-->

@@ -32,7 +32,13 @@ class KnnController extends Controller
         $hasil = $this->knn($training, $input);
         $nilai = $this->memilah($hasil);
 
-        return view('knn.hasil', compact('hasil', 'nilai', 'training', 'input'));
+        $nn1 = $this->nn1($nilai, $training, $input);
+        $nn3 = $this->nn3($nilai, $training, $input);
+
+
+
+
+        return view('knn.hasil', compact('hasil', 'nilai', 'training', 'input', 'nn1', 'nn3'));
     }
 
     public function knn($dataAngka, $input)
@@ -175,5 +181,172 @@ class KnnController extends Controller
         }
 
         return $nilai;
+    }
+
+    public function nn1($nilai, $training, $input)
+    {
+        $hasil = '';
+        // Menentukan Klasifikasi 3-NN
+        // Jika nilainn1 Lebih Besar dari nilainn1ya maka hasilnya Tidak
+        if ($nilai['nn1']['sopran'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'SOPRAN'.";
+        } else if ($nilai['nn1']['alto'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'ALTO'.";
+        } else if ($nilai['nn1']['tenor'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'TENOR'.";
+        } else if ($nilai['nn1']['bass'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'BASS'.";
+        }
+
+        return $hasil;
+    }
+
+    public function nn3($nilai, $training, $input)
+    {
+        $hasil = '';
+        // Menentukan Klasifikasi 3-NN
+        // Jika nilainn3 Lebih Besar dari nilainn3ya maka hasilnya Tidak
+        if ($nilai['nn3']['sopran'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn3'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'SOPRAN'.";
+        } else if ($nilai['nn3']['alto'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn3'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'ALTO'.";
+        } else if ($nilai['nn3']['tenor'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn3'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'TENOR'.";
+        } else if ($nilai['nn3']['bass'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn3'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+            $hasil .= "Data minimum terdekat terdapat pada data nomor ";
+            for ($i = 0; $i < count($tampung); $i++) {
+                $hasil .= $tampung[$i];
+                $hasil .= ", ";
+            }
+            $hasil .=  "Maka data uji ({$input['pitch']},{$input['jenis_kelamin']},{$input['c']},{$input['f']},{$input['b']},{$input['e']},) masuk jenis suara 'BASS'.";
+        }
+
+        return $hasil;
+    }
+
+
+    public function hasil_uji($nilai, $training, $input)
+    {
+        $hasil = '';
+        // Menentukan Klasifikasi 3-NN
+        // Jika nilainn1 Lebih Besar dari nilainn1ya maka hasilnya Tidak
+        if ($nilai['nn1']['sopran'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+
+            for ($i = 0; $i < count($tampung); $i++) {
+            }
+            $hasil .=  "SOPRAN";
+        } else if ($nilai['nn1']['alto'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+
+            for ($i = 0; $i < count($tampung); $i++) {
+            }
+            $hasil .=  "ALTO";
+        } else if ($nilai['nn1']['tenor'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+
+            for ($i = 0; $i < count($tampung); $i++) {
+            }
+            $hasil .=  "TENOR";
+        } else if ($nilai['nn1']['bass'] != 0) {
+            foreach ($training as $value => $isi) {
+                if ($training[$value]['nn1'] != 0) {
+                    $tampung[] = $training[$value]['id'];
+                }
+            }
+
+            for ($i = 0; $i < count($tampung); $i++) {
+            }
+            $hasil .=  "BASS";
+        }
+
+        return $hasil;
     }
 }

@@ -9,7 +9,7 @@
 <div class="bg-body-light">
     <div class="content content-full">
         <div class="d-flex flex-column flex-sm-row justify-content-sm-between align-items-sm-center">
-            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Data Data Training</h1>
+            <h1 class="flex-sm-fill font-size-h2 font-w400 mt-2 mb-0 mb-sm-2">Data Training</h1>
         </div>
     </div>
 </div>
@@ -42,7 +42,7 @@
                         <th>Menirukan Bass</th>
                         <!-- <th>Menirukan Bass 2</th>
                         <th>Menirukan Bass 3</th> -->
-                        <th>Jenis Suara/th>
+                        <th>Jenis Suara</th>
                         <th style="width: 15%;">Aksi</th>
                     </tr>
                 </thead>
