@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-
+Route::get('test_knn', 'KnnController@knn_libs');
 
 
 Auth::routes();

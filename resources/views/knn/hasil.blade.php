@@ -19,6 +19,61 @@
 <div class="content">
     <!-- Your Block -->
     <div class="row">
+        <div class="col-md-6">
+            <div class="block block-rounded">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Akurasi</h3>
+                </div>
+                <div class="block-content">
+
+                    <table class="table table-bordered ">
+                        <thead>
+                            <tr>
+                                <th>K</th>
+                                <th>Akurasi</th>
+                                <th>Correct</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($akurasi as $acc)
+                            <tr>
+                                <td>K={{ $acc['k'] }}</td>
+                                <td>{{ $acc['akurasi'] }}%</td>
+                                <td>{{ $acc['correct'] }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <br><br>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="block block-rounded">
+                <div class="block-header block-header-default">
+                    <h3 class="block-title">Confusion Matrix</h3>
+                </div>
+                <div class="block-content">
+
+                    <table class="table table-bordered ">
+                        <tbody>
+                            <?php
+                            for ($i = 0; $i < 5; $i++) {
+                                echo '<tr>';
+                                for ($j = 0; $j < 5; $j++) {
+                                    echo '<td>';
+                                    echo $conf[$i][$j];
+                                    echo '</td>';
+                                }
+                                echo '</tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+                <br><br>
+            </div>
+        </div>
         <div class="col-md-12">
             <div class="block block-rounded">
                 <div class="block-header block-header-default">
@@ -46,8 +101,8 @@
                                 <th>Suara</th>
                                 <th>Jarak</th>
                                 <th>Urutan</th>
-                                <th>1-NN</th>
-                                <th>3-NN</th>
+                                <!-- <th>1-NN</th>
+                                <th>3-NN</th> -->
                             </tr>
                         </thead>
                         <tbody>
@@ -63,29 +118,12 @@
                                 <td>{{ $data_hasil['suara'] }}</td>
                                 <td> {!! "&radic;({$data_hasil['pitch']} - {$input['pitch']})<sup>2</sup> + ({$data_hasil['jenis_kelamin']} - {$input['jenis_kelamin']})<sup>2</sup> + ({$data_hasil['c']} - {$input['c']})<sup>2</sup> + ({$data_hasil['f']} - {$input['f']})<sup>2</sup> +({$data_hasil['b']} - {$input['b']})<sup>2</sup>+({$data_hasil['e']} - {$input['e']})<sup>2</sup>= " . number_format($data_hasil['jarak'], 2) !!}</td>
                                 <td>{{ $data_hasil['urut'] }}</td>
-                                <td>{{ $data_hasil['nn1'] }}</td>
-                                <td>{{ $data_hasil['nn3'] }}</td>
+
                             </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
-        <div class="col-md-12">
-            <div class="block block-rounded">
-                <div class="block-header block-header-default">
-                    <h3 class="block-title">Kesimpulan</h3>
-                </div>
-                <div class="block-content">
-                    <h3 class="block-title">1-NN</h3>
-                    {{ $nn1 }}
-                </div>
-                <div class="block-content">
-                    <h3 class="block-title">3-NN</h3>
-                    {{ $nn3 }}
-                </div>
-                <br><br>
             </div>
         </div>
 

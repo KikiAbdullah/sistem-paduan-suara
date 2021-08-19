@@ -4,6 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Training;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Phpml\Classification\KNearestNeighbors;
+use Phpml\Dataset\ArrayDataset;
+use Phpml\Dataset\CsvDataset;
+use Phpml\Math\Distance\Euclidean;
+use Phpml\Metric\Accuracy;
+use Phpml\Metric\ConfusionMatrix;
 
 class KnnController extends Controller
 {
@@ -32,13 +39,17 @@ class KnnController extends Controller
         $hasil = $this->knn($training, $input);
         $nilai = $this->memilah($hasil);
 
-        $nn1 = $this->nn1($nilai, $training, $input);
-        $nn3 = $this->nn3($nilai, $training, $input);
+        // $nn1 = $this->nn1($nilai, $training, $input);
+        // $nn3 = $this->nn3($nilai, $training, $input);
+
+        $akurasi = $this->accuracy();
+
+        $conf = $this->confusion();
 
 
 
 
-        return view('knn.hasil', compact('hasil', 'nilai', 'training', 'input', 'nn1', 'nn3'));
+        return view('knn.hasil', compact('hasil', 'nilai', 'training', 'input', 'akurasi','conf'));
     }
 
     public function knn($dataAngka, $input)
@@ -348,5 +359,150 @@ class KnnController extends Controller
         }
 
         return $hasil;
+    }
+
+
+    public function knn_libs()
+    {
+
+        $akurasi = $this->accuracy();
+        dd($akurasi);
+
+        $samples = [];
+        $labels = [];
+        $data = DB::table('data_training')
+            ->select('pitch', 'jenis_kelamin', 'c', 'f', 'b', 'e', 'suara')
+            ->get();
+
+        foreach ($data as $key => $value) {
+            $samples[] = [
+                (int) $value->pitch,
+                (int) $value->jenis_kelamin,
+                $value->c,
+                $value->f,
+                $value->b,
+                $value->e,
+            ];
+
+            $labels[] = (int) $value->suara;
+        }
+        $dataset = new ArrayDataset($samples, $labels);
+        $k = 5;
+        foreach (range(1, 10) as $k) {
+            $correct = 0;
+            foreach ($dataset->getSamples() as $index => $sample) {
+                $estimator = new KNearestNeighbors($k);
+                $estimator->train($dataset->getSamples(), $dataset->getTargets());
+
+                $predicted = $estimator->predict([$sample]);
+
+                if ($predicted[0] === $dataset->getTargets()[$index]) {
+                    $correct++;
+                }
+            }
+            dd($correct);
+
+            $hasil =  sprintf('Accuracy (k=%s): %.02f%% correct: %s', $k, ($correct / count($dataset->getSamples())) * 100, $correct) . PHP_EOL;
+        }
+
+        // dd(json_encode($labels));
+        // $samples = [[1, 3], [1, 4], [2, 4], [3, 1], [4, 1], [4, 2]];
+        // $labels = ['a', 'a', 'a', 'b', 'b', 'b'];
+
+        $classifier = new KNearestNeighbors($k = 5);
+        $train = $classifier->train($samples, $labels);
+
+        $predict = $classifier->predict($samples);
+        dd($classifier);
+
+        $euclidean = new Euclidean();
+        $jarak = $euclidean->distance($samples[0], [1, 2, 0, 1, 0, 1]);
+
+
+        // //AKURASI
+        // $actualLabels = ['a', 'b', 'a', 'b'];
+        // $predictedLabels = ['a', 'a', 'a', 'b'];
+
+        // $hasil = Accuracy::score($actualLabels, $predictedLabels);
+
+        // //CONFUSION MATRICS
+        // $actualTargets = ['cat', 'ant', 'cat', 'cat', 'ant', 'bird'];
+        // $predictedTargets = ['ant', 'ant', 'cat', 'cat', 'ant', 'cat'];
+
+        // $confusionMatrix = ConfusionMatrix::compute($actualTargets, $predictedTargets);
+
+        dd($predict);
+    }
+
+    function accuracy()
+    {
+        $samples = [];
+        $labels = [];
+        $data = DB::table('data_training')
+            ->select('pitch', 'jenis_kelamin', 'c', 'f', 'b', 'e', 'suara')
+            ->get();
+
+        foreach ($data as $key => $value) {
+            $samples[] = [
+                (int) $value->pitch,
+                (int) $value->jenis_kelamin,
+                $value->c,
+                $value->f,
+                $value->b,
+                $value->e,
+            ];
+
+            $labels[] = (int) $value->suara;
+        }
+        $dataset = new ArrayDataset($samples, $labels);
+        foreach (range(1, 10) as $k) {
+            $correct = 0;
+            foreach ($dataset->getSamples() as $index => $sample) {
+                $estimator = new KNearestNeighbors($k);
+                $estimator->train($dataset->getSamples(), $dataset->getTargets());
+
+                $predicted = $estimator->predict([$sample]);
+
+                if ($predicted[0] === $dataset->getTargets()[$index]) {
+                    $correct++;
+                }
+            }
+            $hasil[] = [
+                'k' => $k,
+                'akurasi' => sprintf('%.02f%', ($correct / count($dataset->getSamples())) * 100, $correct) . PHP_EOL,
+                'correct' =>  $correct . PHP_EOL,
+            ];
+            // $hasil[] = sprintf('Akurasi (k=%s): %.02f%% correct: %s', $k, ($correct / count($dataset->getSamples())) * 100, $correct) . PHP_EOL;
+        }
+
+        return $hasil;
+    }
+
+    function confusion()
+    {
+        $actual = [];
+        $predict = [];
+        $data = DB::table('data_training')
+            ->select('pitch', 'jenis_kelamin', 'c', 'f', 'b', 'e', 'suara')
+            ->get();
+
+        foreach ($data as $key => $value) {
+            // $samples[] = [
+            //     (int) $value->pitch,
+            //     (int) $value->jenis_kelamin,
+            //     $value->c,
+            //     $value->f,
+            //     $value->b,
+            //     $value->e,
+            // ];
+            if ($key % 2 == 0) {
+                $actual[] = (int) $value->suara;
+            } else {
+                $predict[] = (int) $value->suara;
+            }
+        }
+        unset($actual[34]);
+        $confusionMatrix = ConfusionMatrix::compute($actual, $predict);
+        return $confusionMatrix;
     }
 }
